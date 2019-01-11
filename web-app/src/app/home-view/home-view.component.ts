@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ItemService } from '../item.service';
+import { Item } from '../item';
 
 
 @Component({
@@ -9,13 +11,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeViewComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  items : Item[] = [];
+  iter: any;
+
+  constructor(private itemService : ItemService) { }
 
   ngOnInit() {
-    this.httpClient.get('https://superfacilapp.appspot.com/')
-    .subscribe(data => {
-      console.log(data);
-    })
+    this.getItems().subscribe(data => {
+      if (data) {
+        this.iter = data;
+        for (const item of this.iter) {
+          this.items.push(new Item(item['name'], item['id']));
+        }
+        console.log(this.items);
+
+      }
+    });
+    console.log(this.items);
   }
 
+  getItems() {
+    return this.itemService.getItems();
+  }
 }
