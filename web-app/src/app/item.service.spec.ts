@@ -37,7 +37,7 @@ describe('ItemService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get correct json file', () => {
+  it('should get correct json file from data.json', () => {
     const service: ItemService = TestBed.get(ItemService);
     console.log("im outside");
     service.getItems().subscribe(data => {
