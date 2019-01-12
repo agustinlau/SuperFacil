@@ -16,9 +16,11 @@ export class ItemService {
   constructor(private httpClient : HttpClient) { }
 
   getItems() {
-    return this.httpClient.get('assets/data.json');
+    let sdf = this.httpClient.get('assets/data.json');
+    console.log(sdf);
+    return sdf;
   }
-
+  
 
   // another way of doing it *ignore*
   // getItem2() : Observable<Item[]> {
