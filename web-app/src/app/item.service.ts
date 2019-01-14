@@ -15,7 +15,7 @@ export class ItemService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getItems() {
+  getItems() : Observable<Object> {
     let sdf = this.httpClient.get('assets/data.json');
     console.log(sdf);
     return sdf;
