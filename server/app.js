@@ -8,6 +8,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 routes(app);
 
-var server = app.listen(3000, function () {
-    console.log("app running on port.", server.address().port);
+// Listen to the App Engine-specified port, or 8080 otherwise
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+	console.log('Server listening on port ${PORT}...');
 });
