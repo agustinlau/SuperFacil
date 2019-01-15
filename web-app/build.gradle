@@ -4,3 +4,38 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
+
+ import org.gradle.internal.os.OperatingSystem;
+
+plugins {
+
+}
+
+repositories {
+    jcenter()
+}
+
+ext {
+    superFacilWebDir = "$project.projectDir"
+}
+
+task npmInitSuperFacilWeb(type: Exec) {
+    // workingDir './'
+    workingDir "$superFacilWebDir"
+    // MacOsX
+    if (OperatingSystem.current().isWindows()) {
+        commandLine "cmd", "/c", 'npm', 'install'
+    } else {
+        commandLine 'npm', 'install'
+    }
+}
+
+task packageSuperFacilWeb(type: Exec) {
+    workingDir "$superFacilWebDir"
+    if (OperatingSystem.current().isWindows()) {
+        commandLine "cmd", "/c", 'npm', 'run', 'package'
+    } else {
+        commandLine 'npm', 'run', 'package'
+    }
+}
+packageSuperFacilWeb.dependsOn npmInitSuperFacilWeb
